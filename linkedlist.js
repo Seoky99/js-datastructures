@@ -128,8 +128,22 @@ function LinkedList() {
         return stringRepr; 
     }
 
+    function replace(index, newValue) {
+        if (index >= numElements || index < 0) {
+            return;
+        }
+        
+        let currNode = head; 
+
+        for (let i = 0; i < index; i++) {
+            currNode = currNode.nextNode; 
+        }
+
+        currNode.value = newValue; 
+    }
+
     function insertAt(value, index) {
-        if (index > numElements || index < 0) {
+        if (index >= numElements || index < 0) {
             return;
         }
 
@@ -196,5 +210,61 @@ function LinkedList() {
         numElements--; 
     }
 
-    return {append, prepend, size, getHead, getTail, at, pop, contains, find, toString, insertAt, removeAt};
+    function values() {
+
+        if (numElements === 0) {
+            return [];
+        }
+
+        const values = [];
+        let currNode = head; 
+
+        while (currNode != null) {
+            values.push(currNode.value);
+            currNode = currNode.nextNode;
+        }
+
+        return values; 
+    }
+
+    return {append, prepend, size, getHead, getTail, at, pop, contains, find, toString, replace, insertAt, removeAt, values};
 }
+
+function keyValueLinkedList() {
+    let ll = LinkedList(); 
+
+    function find(key) {
+        let index = 0;
+        let currNode = ll.getHead(); 
+
+        while (currNode !== null) {
+            let nodeKey = currNode.value[0]; 
+            if (nodeKey === key) {
+                return index; 
+            }
+            currNode = currNode.nextNode; 
+            index++;
+        }
+        return -1;
+    }
+
+    return {
+        append: ll.append,
+        prepend: ll.prepend,
+        size: ll.size,
+        getHead: ll.getHead,
+        getTail: ll.getTail,
+        at: ll.at,
+        pop: ll.pop,
+        contains: ll.contains,
+        find,
+        toString: ll.toString,
+        replace: ll.replace,
+        insertAt: ll.insertAt,
+        removeAt: ll.removeAt,
+        values: ll.values,
+      };
+    
+    }
+
+export { keyValueLinkedList, Node }; 
