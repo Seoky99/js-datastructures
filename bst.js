@@ -298,9 +298,9 @@ function createRandomNumbers() {
     return arr; 
 }
 
-tree.buildTree(createRandomNumbers());
+/*tree.buildTree(createRandomNumbers());
 console.log(tree.isBalanced());
 tree.insert(100); 
 tree.insert(101);
 console.log(tree.isBalanced());
-tree.rebalance();
+tree.rebalance(); */
